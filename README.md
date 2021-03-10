@@ -23,6 +23,14 @@ dependencies: [
 ]
 ```
 
+## Extensions
+
+The bulk of code is in the form of extensions on `ProcessInfo`, for accessing various environment variables. A single `[String:String]` dictionary of the user's environment is available as the `userEnvironment` property.
+
+```swift
+ProcessInfo.userEnvironment
+```
+
 ### Suggestions or Feedback
 
 We'd love to hear from you! Get in touch via [twitter](https://twitter.com/chimehq), an issue, or a pull request.
