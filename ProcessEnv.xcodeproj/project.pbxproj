@@ -10,6 +10,8 @@
 		C922C25E25F8DB46006A51DB /* ProcessEnv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C922C25425F8DB46006A51DB /* ProcessEnv.framework */; };
 		C922C26325F8DB46006A51DB /* ProcessEnvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C922C26225F8DB46006A51DB /* ProcessEnvTests.swift */; };
 		C922C26525F8DB46006A51DB /* ProcessEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = C922C25725F8DB46006A51DB /* ProcessEnv.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C922C27025F8DD30006A51DB /* Process+Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = C922C26F25F8DD30006A51DB /* Process+Output.swift */; };
+		C922C27225F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C922C27125F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,9 @@
 		C922C25D25F8DB46006A51DB /* ProcessEnvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProcessEnvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C922C26225F8DB46006A51DB /* ProcessEnvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessEnvTests.swift; sourceTree = "<group>"; };
 		C922C26425F8DB46006A51DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C922C26E25F8DC51006A51DB /* ProcessEnv.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProcessEnv.xcconfig; sourceTree = "<group>"; };
+		C922C26F25F8DD30006A51DB /* Process+Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Process+Output.swift"; sourceTree = "<group>"; };
+		C922C27125F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+UserEnvironment.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,9 @@
 			children = (
 				C922C25725F8DB46006A51DB /* ProcessEnv.h */,
 				C922C25825F8DB46006A51DB /* Info.plist */,
+				C922C26E25F8DC51006A51DB /* ProcessEnv.xcconfig */,
+				C922C26F25F8DD30006A51DB /* Process+Output.swift */,
+				C922C27125F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift */,
 			);
 			path = ProcessEnv;
 			sourceTree = "<group>";
@@ -147,6 +155,7 @@
 				TargetAttributes = {
 					C922C25325F8DB46006A51DB = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 					C922C25C25F8DB46006A51DB = {
 						CreatedOnToolsVersion = 12.5;
@@ -194,6 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C922C27225F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift in Sources */,
+				C922C27025F8DD30006A51DB /* Process+Output.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,45 +350,44 @@
 		};
 		C922C26925F8DB46006A51DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C922C26E25F8DC51006A51DB /* ProcessEnv.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ProcessEnv/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chimehq.ProcessEnv;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		C922C26A25F8DB46006A51DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C922C26E25F8DC51006A51DB /* ProcessEnv.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ProcessEnv/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chimehq.ProcessEnv;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -386,6 +396,7 @@
 		C922C26C25F8DB46006A51DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ProcessEnvTests/Info.plist;
@@ -403,6 +414,7 @@
 		C922C26D25F8DB46006A51DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ProcessEnvTests/Info.plist;
