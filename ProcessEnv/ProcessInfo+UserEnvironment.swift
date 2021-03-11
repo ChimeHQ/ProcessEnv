@@ -7,8 +7,8 @@
 
 import Foundation
 
-public extension ProcessInfo {
-    var shellExecutablePath: String {
+extension ProcessInfo {
+    public var shellExecutablePath: String {
         if let value = environment["SHELL"], !value.isEmpty {
             return value
         }
@@ -21,7 +21,7 @@ public extension ProcessInfo {
         return "/bin/bash"
     }
 
-    var pwShell: String? {
+    public var pwShell: String? {
         guard let passwd = getpwuid(getuid()) else {
             return nil
         }
@@ -33,7 +33,7 @@ public extension ProcessInfo {
         return String(cString: cString)
     }
 
-    var pwUserName: String? {
+    public var pwUserName: String? {
         guard let passwd = getpwuid(getuid()) else {
             return nil
         }
@@ -45,7 +45,7 @@ public extension ProcessInfo {
         return String(cString: cString)
     }
 
-    var pwDir: String? {
+    public var pwDir: String? {
         guard let passwd = getpwuid(getuid()) else {
             return nil
         }
@@ -57,11 +57,11 @@ public extension ProcessInfo {
         return String(cString: cString)
     }
 
-    var path: String {
+    public var path: String {
         return environment["PATH"] ?? "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     }
 
-    var homePath: String {
+    public var homePath: String {
         if let path = environment["HOME"] {
             return path
         }
@@ -82,7 +82,7 @@ public extension ProcessInfo {
         return ""
     }
 
-    var userEnvironment: [String : String] {
+    public var userEnvironment: [String : String] {
         let args = ["-lc", "/usr/bin/env"]
         let defaultEnv = ["TERM": "xterm-256color",
                           "HOME": homePath,
@@ -96,7 +96,7 @@ public extension ProcessInfo {
         return parseEnvOutput(data)
     }
 
-    private func parseEnvOutput(_ data: Data) -> [String : String] {
+     func parseEnvOutput(_ data: Data) -> [String : String] {
         guard let string = String(data: data, encoding: .utf8) else {
             return [:]
         }
@@ -107,12 +107,11 @@ public extension ProcessInfo {
         string.enumerateLines { (line, _) in
             let components = line.split(separator: "=")
 
-            guard components.count == 2 else {
+            guard let key = components.first?.trimmingCharacters(in: charSet) else {
                 return
             }
 
-            let key = String(components[0].trimmingCharacters(in: charSet))
-            let value = String(components[1].trimmingCharacters(in: charSet))
+            let value = components.dropFirst().joined(separator: "=").trimmingCharacters(in: charSet)
 
             env[key] = value
         }

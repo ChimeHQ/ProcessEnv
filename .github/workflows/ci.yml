@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    name: Test on destination ${{ matrix.destination }}
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ["platform=macOS"]
+    steps:
+      - uses: actions/checkout@v1
+      - name: xcodebuild test ${{ matrix.destination }}
+        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "${{ matrix.destination }}" | xcpretty
