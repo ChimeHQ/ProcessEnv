@@ -18,4 +18,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: xcodebuild test ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "${{ matrix.destination }}" | xcpretty
+        run: set -o pipefail && xcodebuild test -scheme ProcessEnv -destination "${{ matrix.destination }}" | xcpretty
