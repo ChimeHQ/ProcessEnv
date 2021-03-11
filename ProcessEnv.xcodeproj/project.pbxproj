@@ -34,6 +34,7 @@
 		C922C26E25F8DC51006A51DB /* ProcessEnv.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProcessEnv.xcconfig; sourceTree = "<group>"; };
 		C922C26F25F8DD30006A51DB /* Process+Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Process+Output.swift"; sourceTree = "<group>"; };
 		C922C27125F8DD93006A51DB /* ProcessInfo+UserEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+UserEnvironment.swift"; sourceTree = "<group>"; };
+		C97968B125FA6D6E006ED39E /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 		C922C24A25F8DB46006A51DB = {
 			isa = PBXGroup;
 			children = (
+				C97968B125FA6D6E006ED39E /* Project.xcconfig */,
 				C922C25625F8DB46006A51DB /* ProcessEnv */,
 				C922C26125F8DB46006A51DB /* ProcessEnvTests */,
 				C922C25525F8DB46006A51DB /* Products */,
@@ -229,6 +231,7 @@
 /* Begin XCBuildConfiguration section */
 		C922C26625F8DB46006A51DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C97968B125FA6D6E006ED39E /* Project.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -279,7 +282,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -293,6 +295,7 @@
 		};
 		C922C26725F8DB46006A51DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C97968B125FA6D6E006ED39E /* Project.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -337,7 +340,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -367,7 +369,6 @@
 				);
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -389,7 +390,6 @@
 					"@loader_path/Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -407,7 +407,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chimehq.ProcessEnvTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -425,7 +424,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chimehq.ProcessEnvTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
