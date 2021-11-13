@@ -28,6 +28,14 @@ class ProcessEnvTests: XCTestCase {
         let data = ProcessInfo.processInfo.parseEnvOutput(output.data(using: .utf8)!)
 
         XCTAssertEqual(data, ["KEY" : "tricky=value"])
+    }
 
+    func testEnvironmentVariables() throws {
+        let env = ProcessInfo.processInfo.userEnvironment
+
+        XCTAssertFalse(env.isEmpty)
+        
+        XCTAssertNotNil(env["SHELL"])
+        XCTAssertNotNil(env["HOME"])
     }
 }

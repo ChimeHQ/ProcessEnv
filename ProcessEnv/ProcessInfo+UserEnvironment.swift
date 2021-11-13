@@ -8,6 +8,11 @@
 import Foundation
 
 extension ProcessInfo {
+    /// The path to the current user's shell executable
+    ///
+    /// This attempts to query the `SHELL` environment variable, the
+    /// password directory (via `getpwuid`), or if those fail
+    /// falls back to "/bin/bash".
     public var shellExecutablePath: String {
         if let value = environment["SHELL"], !value.isEmpty {
             return value
@@ -56,7 +61,11 @@ extension ProcessInfo {
 
         return String(cString: cString)
     }
-
+    /// Returns the value of PATH
+    ///
+    /// If PATH is set in the envrionment, it is returned. If not,
+    /// the fallback value of "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    /// is returned.
     public var path: String {
         return environment["PATH"] ?? "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     }

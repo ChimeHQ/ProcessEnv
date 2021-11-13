@@ -27,7 +27,11 @@ github "ChimeHQ/ProcessEnv"
 The bulk of code is in the form of extensions on `ProcessInfo`, for accessing various environment variables. A single `[String:String]` dictionary of the user's environment is available as the `userEnvironment` property.
 
 ```swift
-ProcessInfo.userEnvironment
+ProcessInfo.processInfo.userEnvironment
+
+ProcessInfo.processInfo.path // $PATH
+ProcessInfo.processInfo.homePath
+ProcessInfo.processInfo.shellExecutablePath
 ```
 
 ### Suggestions or Feedback
