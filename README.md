@@ -1,20 +1,10 @@
 [![Github CI](https://github.com/ChimeHQ/ProcessEnv/workflows/CI/badge.svg)](https://github.com/ChimeHQ/ProcessEnv/actions)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
-![](https://img.shields.io/badge/Swift-5.0-orange.svg)
 
 # ProcessEnv
 
-ProcessEnv is a small library for capturing the shell configuration used by a Foundation/AppKit process. This is very handy for launching `NSTask` instances with the same configuration.
+ProcessEnv is a small library for capturing the shell configuration used by a Foundation/AppKit process. This is very handy for launching `Task`/`NSTask` instances with the same configuration.
 
 ## Integration
-
-Carthage:
-
-You can use [Carthage](https://github.com/Carthage/Carthage) to install this as a static library.
-
-```
-github "ChimeHQ/ProcessEnv"
-```
 
 Swift Package Manager:
 
@@ -22,6 +12,14 @@ Swift Package Manager:
 dependencies: [
     .package(url: "https://github.com/ChimeHQ/ProcessEnv.git")
 ]
+```
+
+Carthage:
+
+You can use [Carthage](https://github.com/Carthage/Carthage) to install this as a static library.
+
+```
+github "ChimeHQ/ProcessEnv"
 ```
 
 ## Extensions

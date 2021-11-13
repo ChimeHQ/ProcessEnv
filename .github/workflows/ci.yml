@@ -10,12 +10,11 @@ on:
 
 jobs:
   test:
-    name: Test on destination ${{ matrix.destination }}
+    name: Test
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        destination: ["platform=macOS"]
     steps:
       - uses: actions/checkout@v1
-      - name: xcodebuild test ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild test -scheme ProcessEnv -destination "${{ matrix.destination }}" | xcpretty
+      - name: swift test
+        run: swift test
+      - name: carthage
+        run: carthage build --no-skip-current
