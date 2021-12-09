@@ -24,7 +24,7 @@ github "ChimeHQ/ProcessEnv"
 
 ## Extensions
 
-The bulk of code is in the form of extensions on `ProcessInfo`, for accessing various environment variables. A single `[String:String]` dictionary of the user's environment is available as the `userEnvironment` property.
+The bulk of code is in the form of extensions on `ProcessInfo`, for accessing various environment variables. A single `[String : String]` dictionary of the user's environment is available as the `userEnvironment` property.
 
 ```swift
 ProcessInfo.processInfo.userEnvironment
