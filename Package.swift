@@ -5,13 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "ProcessEnv",
-    platforms: [.macOS("10.11")],
+    platforms: [.macOS(.v10_11)],
     products: [
         .library(name: "ProcessEnv", targets: ["ProcessEnv"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "ProcessEnv", dependencies: [], path: "ProcessEnv/"),
-        .testTarget(name: "ProcessEnvTests", dependencies: ["ProcessEnv"], path: "ProcessEnvTests/"),
+        .target(name: "ProcessEnv", dependencies: []),
+        .testTarget(name: "ProcessEnvTests", dependencies: ["ProcessEnv"]),
     ]
 )

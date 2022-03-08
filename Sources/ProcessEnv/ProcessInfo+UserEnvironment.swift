@@ -7,6 +7,10 @@
 
 import Foundation
 
+public extension Process {
+    typealias Envrionment = [String : String]
+}
+
 extension ProcessInfo {
     /// The path to the current user's shell executable
     ///
@@ -96,26 +100,9 @@ extension ProcessInfo {
     /// This method attempts to reconstruct the user
     /// envrionment that would be set up when logging into
     /// a terminal session.
-    ///
-    /// This is done by executing:
-    ///
-    ///     shellExecutablePath -ilc /usr/bin/env
-    ///
-    /// This method executes this with the `environment` environment
-    /// variables set. But, it also ensures that the `TERM`, `HOME`, and
-    /// `PATH` variables have values, if aren't present in `environment`.
-    ///
-    /// The `-i` and `-l` flags are critical, as they control how many
-    /// shells read configuration files.
     public var userEnvironment: [String : String] {
-        let args = ["-ilc", "/usr/bin/env"]
-        let defaultEnv = ["TERM": "xterm-256color",
-                          "HOME": homePath,
-                          "PATH": path]
-        let env = environment.merging(defaultEnv, uniquingKeysWith: { (a, _) in a })
-
-        guard let data = Process.readOutput(from: shellExecutablePath, arguments: args, environment: env) else {
-            return env
+        guard let data = try? Process.executeAsUser(.init(path: "/usr/bin/env", environment: environment)) else {
+            return environment
         }
 
         return parseEnvOutput(data)

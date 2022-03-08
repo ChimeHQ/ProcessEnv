@@ -1,10 +1,3 @@
-//
-//  ProcessEnvTests.swift
-//  ProcessEnvTests
-//
-//  Created by Matthew Massicotte on 2021-03-10.
-//
-
 import XCTest
 @testable import ProcessEnv
 
@@ -37,5 +30,20 @@ class ProcessEnvTests: XCTestCase {
         
         XCTAssertNotNil(env["SHELL"])
         XCTAssertNotNil(env["HOME"])
+    }
+
+    func testParameterCommand() throws {
+        let params = Process.ExecutionParameters(path: "cmd", arguments: ["-u", "-v"])
+
+        XCTAssertEqual(params.command, "cmd -u -v")
+    }
+
+    func testUserShellParameters() throws {
+        let params = Process.ExecutionParameters(path: "cmd", arguments: ["-u", "-v"])
+
+        let userParams = params.userShellInvocation()
+
+        XCTAssertEqual(userParams.path, ProcessInfo.processInfo.shellExecutablePath)
+        XCTAssertEqual(userParams.arguments, ["-ilc", "cmd -u -v"])
     }
 }
