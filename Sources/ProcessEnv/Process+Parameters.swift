@@ -3,7 +3,8 @@ import Foundation
 #if os(macOS) || os(Linux)
 
 public extension Process {
-    struct ExecutionParameters {
+	/// Wraps up all of the parameters needed for starting a Process into one single type.
+	struct ExecutionParameters: Codable, Hashable, Sendable {
         public var path: String
         public var arguments: [String]
         public var environment: [String : String]?
