@@ -84,11 +84,19 @@ extension ProcessInfo {
         }
 
         if #available(macOS 12.0, *) {
-            return "/Users/\(userName)"
+            #if !os(Linux)
+                return "/Users/\(userName)"
+            #else
+                return "/home/\(userName)"
+            #endif
         }
 
         if let name = pwUserName {
-            return "/Users/\(name)"
+            #if !os(Linux)
+                return "/Users/\(name)"
+            #else
+                return "/home/\(name)"
+            #endif
         }
 
         // I'm not sure there is a reasonable fallback in this situation

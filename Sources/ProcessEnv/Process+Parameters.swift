@@ -36,8 +36,13 @@ public extension Process {
         public func userShellInvocation() -> ExecutionParameters {
             let processInfo = ProcessInfo.processInfo
 
-            let shellPath = processInfo.shellExecutablePath
-            let args = ["-ilc", command]
+            #if !os(Linux)
+                let shellPath = processInfo.shellExecutablePath
+                let args = ["-ilc", command]
+            #else
+                let shellPath = "setsid"
+                let args = [processInfo.shellExecutablePath, "-ilc", command]
+            #endif
             let cwdURL = currentDirectoryURL
 
             let defaultEnv = ["TERM": "xterm-256color",
@@ -70,20 +75,24 @@ public extension Process {
             }
 
             if let cwdPath = newValue?.path {
-                self.currentDirectoryPath = cwdPath
+                self.currentDirectoryURL = URL(fileURLWithPath: cwdPath, isDirectory: true)
             }
         }
     }
 
     var parameters: ExecutionParameters {
         get {
-            return ExecutionParameters(path: self.launchPath ?? "",
+            var path = ""
+            if let url = self.executableURL {
+                path = url.path
+            }
+            return ExecutionParameters(path: path,
                                        arguments: arguments ?? [],
                                        environment: self.environment,
                                        currentDirectoryURL: self.compatibleCurrentDirectoryURL)
         }
         set {
-            self.launchPath = newValue.path
+            self.executableURL = URL(fileURLWithPath: newValue.path, isDirectory: true)
             self.arguments = newValue.arguments
             self.environment = newValue.environment
             self.compatibleCurrentDirectoryURL = newValue.currentDirectoryURL

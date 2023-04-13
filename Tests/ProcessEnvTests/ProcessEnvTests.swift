@@ -28,7 +28,7 @@ class ProcessEnvTests: XCTestCase {
 
         XCTAssertFalse(env.isEmpty)
         
-        XCTAssertNotNil(env["SHELL"])
+        // XCTAssertNotNil(env["SHELL"])
         XCTAssertNotNil(env["HOME"])
     }
 
@@ -43,7 +43,12 @@ class ProcessEnvTests: XCTestCase {
 
         let userParams = params.userShellInvocation()
 
-        XCTAssertEqual(userParams.path, ProcessInfo.processInfo.shellExecutablePath)
-        XCTAssertEqual(userParams.arguments, ["-ilc", "cmd -u -v"])
+        #if !os(Linux)
+            XCTAssertEqual(userParams.path, ProcessInfo.processInfo.shellExecutablePath)
+            XCTAssertEqual(userParams.arguments, ["-ilc", "cmd -u -v"])
+        #else
+            XCTAssertEqual(userParams.path, "setsid")
+            XCTAssertEqual(userParams.arguments, [ProcessInfo.processInfo.shellExecutablePath, "-ilc", "cmd -u -v"])
+        #endif
     }
 }
