@@ -4,7 +4,7 @@
 
 # ProcessEnv
 
-ProcessEnv is a small library for capturing the shell configuration used by a Foundation/AppKit process. This is very handy for launching `Task`/`NSTask` instances with the same configuration.
+ProcessEnv is a small library for capturing the shell configuration used by a Foundation/AppKit process. This is very handy for launching `Process`/`NSTask` instances with the same configuration.
 
 ## Integration
 
