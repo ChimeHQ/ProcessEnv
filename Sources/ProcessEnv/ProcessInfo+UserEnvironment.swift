@@ -95,6 +95,15 @@ extension ProcessInfo {
         return ""
     }
 
+	public var sandboxContainerId: String? {
+		environment["APP_SANDBOX_CONTAINER_ID"]
+	}
+
+	/// Returns true if the process is running with sandboxing enabled.
+	public var isSandboxed: Bool {
+		sandboxContainerId != nil
+	}
+
     /// Capture the interactive-login shell environment
     ///
     /// This method attempts to reconstruct the user
