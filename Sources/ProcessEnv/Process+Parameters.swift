@@ -17,9 +17,19 @@ public extension Process {
             self.currentDirectoryURL = currentDirectoryURL
         }
 
-        public var command: String {
-            return ([path] + arguments).joined(separator: " ")
-        }
+		public var command: String {
+			let escapedArgs = arguments.map { arg in
+				let range = arg.rangeOfCharacter(from: .whitespacesAndNewlines)
+
+				if let range, range.isEmpty == false {
+					return "\"" + arg + "\""
+				}
+
+				return arg
+			}
+
+			return ([path] + escapedArgs).joined(separator: " ")
+		}
 
         /// Returns parameters that emulate an invocation in the user's shell
         ///
