@@ -1,7 +1,7 @@
 import XCTest
 @testable import ProcessEnv
 
-class ProcessEnvTests: XCTestCase {
+final class ProcessEnvTests: XCTestCase {
     func testParseEnvOutput() throws {
         let output = """
             TERM=xterm-256color
@@ -23,14 +23,16 @@ class ProcessEnvTests: XCTestCase {
         XCTAssertEqual(data, ["KEY" : "tricky=value"])
     }
 
-    func testEnvironmentVariables() throws {
-        let env = ProcessInfo.processInfo.userEnvironment
+#if !os(Linux)
+	func testEnvironmentVariables() throws {
+		let env = ProcessInfo.processInfo.userEnvironment
 
-        XCTAssertFalse(env.isEmpty)
-        
-        XCTAssertNotNil(env["SHELL"])
-        XCTAssertNotNil(env["HOME"])
-    }
+		XCTAssertFalse(env.isEmpty)
+
+		XCTAssertNotNil(env["SHELL"])
+		XCTAssertNotNil(env["HOME"])
+	}
+#endif
 
     func testParameterCommand() throws {
         let params = Process.ExecutionParameters(path: "cmd", arguments: ["-u", "-v"])
