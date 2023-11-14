@@ -4,18 +4,38 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'
+      - 'CODE_OF_CONDUCT.md'
+      - '.editorconfig'
+      - '.spi.yml'
   pull_request:
     branches:
-      - '**'
+      - main
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
-
+  DEVELOPER_DIR: /Applications/Xcode_15.0.1.app/Contents/Developer
+  
 jobs:
   test:
     name: Test
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
-      - uses: actions/checkout@v2
-      - name: swift test
+      - uses: actions/checkout@v4
+      - name: Install XCBeautify
+        run: brew install xcbeautify
+      - name: Test
+        run: set -o pipefail && xcodebuild -scheme ProcessEnv -destination "platform=macOS" test | xcbeautify --renderer github-actions
+
+  linux_test:
+    name: Test Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install swiftly
+        run: curl -L https://swift-server.github.io/swiftly/swiftly-install.sh | bash -s -- -y
+      - name: Install the latest Swift toolchain
+        run: swiftly install latest
+      - name: Test
         run: swift test
