@@ -107,7 +107,7 @@ extension ProcessInfo {
     /// Capture the interactive-login shell environment
     ///
     /// This method attempts to reconstruct the user
-    /// envrionment that would be set up when logging into
+    /// environment that would be set up when logging into
     /// a terminal session.
     public var userEnvironment: [String : String] {
         guard let data = try? Process.executeAsUser(.init(path: "/usr/bin/env", environment: environment)) else {
