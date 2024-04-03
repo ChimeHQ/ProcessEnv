@@ -8,6 +8,8 @@
 import Foundation
 
 public extension Process {
+	@available(*, deprecated, renamed: "Environment")
+	typealias Envrionment = [String : String]
     typealias Environment = [String : String]
 }
 
