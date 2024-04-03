@@ -8,7 +8,9 @@
 import Foundation
 
 public extension Process {
-    typealias Envrionment = [String : String]
+	@available(*, deprecated, renamed: "Environment")
+	typealias Envrionment = [String : String]
+    typealias Environment = [String : String]
 }
 
 extension ProcessInfo {
@@ -67,7 +69,7 @@ extension ProcessInfo {
     }
     /// Returns the value of PATH
     ///
-    /// If PATH is set in the envrionment, it is returned. If not,
+    /// If PATH is set in the environment, it is returned. If not,
     /// the fallback value of "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /// is returned.
     public var path: String {
@@ -110,7 +112,7 @@ extension ProcessInfo {
     /// environment that would be set up when logging into
     /// a terminal session.
     public var userEnvironment: [String : String] {
-        guard let data = try? Process.executeAsUser(.init(path: "/usr/bin/env", environment: environment)) else {
+        guard let data = try? Process.executeAsUser(Process.ExecutionParameters(path: "/usr/bin/env", environment: environment)) else {
             return environment
         }
 
